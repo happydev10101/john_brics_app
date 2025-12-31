@@ -96,8 +96,6 @@ export default function HomePage({ currentView, setCurrentView }: HomePageProps)
 
   const isLoaded = mainTokenBalance !== null || userLevel !== null;
   const isInfinityLevel = userLevel?.end === Infinity;
-  const tierBenefits = userLevel?.additionalBenifits ?? [];
-  const displayedBenefits = tierBenefits.slice(0, 6);
 
   let progress = userLevel && mainTokenBalance !== null
     ? ((mainTokenBalance - userLevel.start) / (userLevel.end - userLevel.start)) * 100
@@ -189,23 +187,36 @@ export default function HomePage({ currentView, setCurrentView }: HomePageProps)
             <h3 className="text-sm font-semibold text-gray-300">Benefits from BRICSQFS</h3>
           </div>
           <div className="divide-y divide-gray-200">
-            {displayedBenefits.length > 0 ? (
-              displayedBenefits.map((b, idx) => (
-                <div key={`${b.text}-${idx}`} className="flex items-start space-x-3 p-4">
-                  <span className="text-xl">{b.emoticon}</span>
-                  <div className="flex-1">
-                    <p className="text-sm text-gray-300">{b.text}</p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="flex items-start space-x-3 p-4">
-                <span className="text-xl">💫</span>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-300">Advance tiers to unlock BRICSQFS benefits.</p>
-                </div>
+            <div className="flex items-start space-x-3 p-4">
+              <span className="text-xl">🌏</span>
+              <div className="flex-1">
+                <p className="text-sm text-gray-300">BRICS Special Assets — massive allocations across tiers.</p>
               </div>
-            )}
+            </div>
+            <div className="flex items-start space-x-3 p-4">
+              <span className="text-xl">🤑</span>
+              <div className="flex-1">
+                <p className="text-sm text-gray-300">Mega Daily Rewards on XLM / XRP / USDC / BRICSD.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 p-4">
+              <span className="text-xl">🏠</span>
+              <div className="flex-1">
+                <p className="text-sm text-gray-300">Real-asset estates: tens of thousands to millions of properties.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 p-4">
+              <span className="text-xl">🏦</span>
+              <div className="flex-1">
+                <p className="text-sm text-gray-300">BRICS National/UltraBank capital stacks into the trillions.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 p-4">
+              <span className="text-xl">🚀</span>
+              <div className="flex-1">
+                <p className="text-sm text-gray-300">Intercontinental Tech, Space Fleets, and Quantum AI systems.</p>
+              </div>
+            </div>
           </div>
           <div className="p-4 border-t border-gray-200">
             <button
