@@ -17,9 +17,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { botUrlQr, mainCharacter } from '@/images';
-import IceCube from '@/icons/IceCube';
-import { RefreshCw } from 'lucide-react';
+import { bricsCoin } from '@/images';
 import { calculateEnergyLimit, calculateLevelIndex, calculatePointsPerClick, calculateProfitPerHour, GameState, InitialGameState, useGameStore } from '@/utils/game-mechanics';
 import WebApp from '@twa-dev/sdk';
 import UAParser from 'ua-parser-js';
@@ -166,8 +164,16 @@ export default function Loading({ initialView, setIsInitialized, setCurrentView 
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-full max-w-xl flex flex-col items-center">
-        {/* Rotating Refresh Icon */}
-        <RefreshCw className="w-12 h-12 text-info animate-spin" />
+        <div className="w-64 h-64 animate-[spin_8s_linear_infinite]">
+          <Image
+            src={bricsCoin}
+            alt="BRICS Coin"
+            width={128}
+            height={128}
+            priority
+            className="w-full h-full object-contain"
+          />
+        </div>
       </div>
     </div>
   );

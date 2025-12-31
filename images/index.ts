@@ -49,6 +49,7 @@ import bgStellar1 from "./bg/bg-stellar-1.png";
 import bgStellar2 from "./bg/bg-stellar-2.png";
 import bgStellar3 from "./bg/bg-stellar-3.png";
 import bgStock from "./bg/bg-stock.png";
+import bricsCoin from "./brics-coin.png";
 
 const stockImageMap: Record<string, any> = {
     "AAPL": require("./stock/AAPL.png"),
@@ -145,6 +146,7 @@ export {
     bgStellar2,
     bgStellar3,
     bgStock,
+    bricsCoin,
 };
 
 export const imageMap: Record<string, any> = {
