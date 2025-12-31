@@ -220,9 +220,9 @@ select {
 /* neon theme overrided daisyUI's dark theme */
 [data-theme="dark"] {
   /* RGB triplets for rgba usage */
-  --color-primary-rgb: 94, 23, 235;
-  --color-success-rgb: 163, 255, 18;
-  --color-info-rgb: 0, 224, 255;
+  --color-primary-rgb: 220, 38, 38; /* BRICS China red */
+  --color-success-rgb: 22, 163, 74; /* BRICS Brazil green */
+  --color-info-rgb: 37, 99, 235; /* BRICS Russia blue */
   --color-panel-rgb: 28, 31, 38;
   /* use rgb to define the color */
   --color-primary: rgb(var(--color-primary-rgb));
@@ -233,6 +233,11 @@ select {
 /** Neon backdrop & animated orbs **/
 :root {
   --neon-bg: #0B0E13;
+  --brics-brazil: #16A34A;
+  --brics-russia: #2563EB;
+  --brics-india: #F59E0B;
+  --brics-china: #DC2626;
+  --brics-south-africa: #CA8A04;
 }
 
 .neon-backdrop {
@@ -251,56 +256,85 @@ select {
 
 .neon-ring {
   position: absolute;
-  top: 75%;
-  left: 90%;
-  width: 17rem;
-  height: 17rem;
+  width: 14rem;
+  height: 14rem;
   transform: translate(-50%, -50%);
   border-radius: 9999px;
-  border: 2px solid var(--color-info);
-  opacity: 0.12;
-  box-shadow: 0 0 20px rgba(var(--color-info-rgb), 0.3);
+  opacity: 0.14;
   animation: pulse-ring-simple 10s ease-in-out infinite;
 }
 
-.neon-ring.ring-primary {
+.neon-ring.ring-brazil {
+  border: 2px solid var(--brics-brazil);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brics-brazil) 40%, transparent);
+  animation-duration: 11s;
   top: 65%;
-  left: 90%;
-  width: 22rem;
-  height: 22rem;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
-  animation: pulse-ring-simple 12s ease-in-out infinite;
+  left: 28%;
 }
 
-.neon-ring.ring-accent {
-  top: 75%;
-  left: 95%;
-  width: 26rem;
-  height: 26rem;
-  border-color: rgb(255, 77, 255);
-  box-shadow: 0 0 20px rgba(255, 77, 255, 0.3);
-  animation: pulse-ring-simple 14s ease-in-out infinite 1s;
+.neon-ring.ring-russia {
+  border: 2px solid var(--brics-russia);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brics-russia) 40%, transparent);
+  width: 16rem;
+  height: 16rem;
+  animation-duration: 12s;
+  top: 58%;
+  left: 60%;
+}
+
+.neon-ring.ring-india {
+  border: 2px solid var(--brics-india);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brics-india) 40%, transparent);
+  width: 18rem;
+  height: 18rem;
+  animation-duration: 13s;
+  top: 72%;
+  left: 46%;
+}
+
+.neon-ring.ring-china {
+  border: 2px solid var(--brics-china);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brics-china) 40%, transparent);
+  width: 20rem;
+  height: 20rem;
+  animation-duration: 14s;
+  top: 55%;
+  left: 78%;
+}
+
+.neon-ring.ring-south-africa {
+  border: 2px solid var(--brics-south-africa);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brics-south-africa) 40%, transparent);
+  width: 22rem;
+  height: 22rem;
+  animation-duration: 15s;
+  top: 80%;
+  left: 22%;
 }
 
 .neon-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.35) 1px, transparent 1px),
-    /* Y-axis (6 lines equally spaced) */
+    /* 5 vertical lines */
+    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--color-info-rgb), 0.3) 1px, transparent 1px),
+    /* 6 horizontal lines (unchanged) */
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.35) 1px, transparent 1px),
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.2) 1px, transparent 1px),
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.35) 1px, transparent 1px),
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.2) 1px, transparent 1px),
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.35) 1px, transparent 1px),
     linear-gradient(0deg, rgba(var(--color-info-rgb), 0.2) 1px, transparent 1px);
-  background-size: 1px 100%, 1px 100%, 1px 100%,
-                   100% 1px, 100% 1px, 100% 1px, 100% 1px, 100% 1px, 100% 1px;
-  background-position: 25% 0, 50% 0, 75% 0,
-                       0 14.3%, 0 28.6%, 0 42.9%, 0 57.1%, 0 71.4%, 0 85.7%;
+  background-size:
+    1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%,
+    100% 1px, 100% 1px, 100% 1px, 100% 1px, 100% 1px, 100% 1px;
+  background-position:
+    10% 0, 30% 0, 50% 0, 70% 0, 90% 0,
+    0 14.3%, 0 28.6%, 0 42.9%, 0 57.1%, 0 71.4%, 0 85.7%;
   background-repeat: no-repeat;
   opacity: 0.2;
 }
@@ -308,26 +342,37 @@ select {
 .neon-beam {
   position: absolute;
   top: 0;
-  width: 2px;
-  height: 220px;
-  box-shadow:
-    0 0 16px rgba(var(--color-info-rgb), 0.65),
-    0 0 32px rgba(var(--color-info-rgb), 0.4);
+  width: 3px;
+  height: 240px;
   animation: beam-fall 14s ease-in-out infinite;
   animation-delay: var(--beam-delay, 0s);
   transform: translateY(var(--beam-start, 0));
   animation-fill-mode: both;
 }
 
-.neon-beam.info {
-  background: linear-gradient(transparent, var(--color-info), transparent);
+.neon-beam.beam-brazil {
+  background: linear-gradient(transparent, var(--brics-brazil), transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brics-brazil) 60%, transparent), 0 0 32px color-mix(in srgb, var(--brics-brazil) 40%, transparent);
 }
 
-.neon-beam.primary {
-  background: linear-gradient(transparent, var(--color-primary), transparent);
-  box-shadow:
-    0 0 16px rgba(var(--color-primary-rgb), 0.65),
-    0 0 32px rgba(var(--color-primary-rgb), 0.4);
+.neon-beam.beam-russia {
+  background: linear-gradient(transparent, var(--brics-russia), transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brics-russia) 60%, transparent), 0 0 32px color-mix(in srgb, var(--brics-russia) 40%, transparent);
+}
+
+.neon-beam.beam-india {
+  background: linear-gradient(transparent, var(--brics-india), transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brics-india) 60%, transparent), 0 0 32px color-mix(in srgb, var(--brics-india) 40%, transparent);
+}
+
+.neon-beam.beam-china {
+  background: linear-gradient(transparent, var(--brics-china), transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brics-china) 60%, transparent), 0 0 32px color-mix(in srgb, var(--brics-china) 40%, transparent);
+}
+
+.neon-beam.beam-south-africa {
+  background: linear-gradient(transparent, var(--brics-south-africa), transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brics-south-africa) 60%, transparent), 0 0 32px color-mix(in srgb, var(--brics-south-africa) 40%, transparent);
 }
 
 .neon-star {

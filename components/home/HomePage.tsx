@@ -9,6 +9,7 @@ import { useAppStore } from '@/utils/app-store';
 import { triggerHapticFeedback } from '@/utils/ui';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Label } from 'recharts';
 import { MoveDown } from "lucide-react";
+import ReactCountryFlag from "react-country-flag";
 import HomeLayout from '../layout/HomeLayout';
 import { useUser } from '@/contexts/UserContext';
 import MainLayout from '../layout/MainLayout';
@@ -32,6 +33,20 @@ const stackChartData = [
 const ASSETS = [
   { code: 'XLM', issuer: 'native' },
   ...SECOND_ASSETS,
+];
+
+const BRICS_MEMBERS = [
+  { name: 'Brazil', code: 'BR' },
+  { name: 'Russia', code: 'RU' },
+  { name: 'India', code: 'IN' },
+  { name: 'China', code: 'CN' },
+  { name: 'South Africa', code: 'ZA' },
+  { name: 'Saudi Arabia', code: 'SA' },
+  { name: 'United Arab Emirates', code: 'AE' },
+  { name: 'Iran', code: 'IR' },
+  { name: 'Egypt', code: 'EG' },
+  { name: 'Ethiopia', code: 'ET' },
+  { name: 'Argentina', code: 'AR' },
 ];
 
 interface HomePageProps {
@@ -81,6 +96,8 @@ export default function HomePage({ currentView, setCurrentView }: HomePageProps)
 
   const isLoaded = mainTokenBalance !== null || userLevel !== null;
   const isInfinityLevel = userLevel?.end === Infinity;
+  const tierBenefits = userLevel?.additionalBenifits ?? [];
+  const displayedBenefits = tierBenefits.slice(0, 6);
 
   let progress = userLevel && mainTokenBalance !== null
     ? ((mainTokenBalance - userLevel.start) / (userLevel.end - userLevel.start)) * 100
@@ -129,6 +146,42 @@ export default function HomePage({ currentView, setCurrentView }: HomePageProps)
           </MyCard>
         )}
         {/** END Tier_Progress_Card */}
+
+        {/** BEGIN BRICS Slogans & Members */}
+        <MyCard>
+          <div className="space-y-3">
+            <div className="mb-4 rounded-lg overflow-hidden">
+              <video
+                poster="https://assets.staticimg.com/brisk-web-ssr/3.0.10/ssr/_next/static/media/trade.b9dd106a3f665cf88094c4fc13e4cb21.png"
+                className="w-full h-auto"
+                autoPlay
+                muted
+                loop
+                playsInline
+                src="https://assets.staticimg.com/brisk-web-ssr/3.0.10/ssr/_next/static/media/trade.521232e669ba7c9225b48f56bfa2eb27.webm"
+              />
+            </div>
+            <h3 className="text-sm font-semibold text-gray-300">BRICS Vision</h3>
+            <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
+              <li>Shared Prosperity. Quantum-Speed Cooperation.</li>
+              <li>Many Nations. One BRICS Liquidity Grid.</li>
+              <li>Energy, Trade, and Trust—Borderless.</li>
+              <li>Real Assets. Real Growth. Real Inclusion.</li>
+              <li>Connectivity from Rio to Riyadh, Beijing to Brasília.</li>
+            </ul>
+
+            <h4 className="text-sm font-semibold text-gray-300 pt-2">BRICS Members (11)</h4>
+            <div className="grid grid-cols-2 gap-2 text-sm text-gray-300">
+              {BRICS_MEMBERS.map((m) => (
+                <div key={m.code} className="flex items-center space-x-2">
+                  <ReactCountryFlag svg countryCode={m.code} style={{ width: '1.25rem', height: '1.25rem' }} />
+                  <span>{m.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </MyCard>
+        {/** END BRICS Slogans & Members */}
         
         {/** BEGIN BRICSQFS_Benefits_Presentation */}
         <MyCard p={0} className="overflow-hidden">
@@ -136,38 +189,23 @@ export default function HomePage({ currentView, setCurrentView }: HomePageProps)
             <h3 className="text-sm font-semibold text-gray-300">Benefits from BRICSQFS</h3>
           </div>
           <div className="divide-y divide-gray-200">
-            <div className="flex items-start space-x-3 p-4">
-              <span className="text-xl">🛍️</span>
-              <div className="flex-1">
-                <p className="text-sm text-gray-300">
-                  <span className="font-bold text-info">Up to 50% </span>of quantum infrastructure ownership
-                </p>
+            {displayedBenefits.length > 0 ? (
+              displayedBenefits.map((b, idx) => (
+                <div key={`${b.text}-${idx}`} className="flex items-start space-x-3 p-4">
+                  <span className="text-xl">{b.emoticon}</span>
+                  <div className="flex-1">
+                    <p className="text-sm text-gray-300">{b.text}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="flex items-start space-x-3 p-4">
+                <span className="text-xl">💫</span>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-300">Advance tiers to unlock BRICSQFS benefits.</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start space-x-3 p-4">
-              <span className="text-xl">🎯</span>
-              <div className="flex-1">
-                <p className="text-sm text-gray-300">
-                  <span className="font-bold text-info">Access</span> to early quantum features
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3 p-4">
-              <span className="text-xl">🎁</span>
-              <div className="flex-1">
-                <p className="text-sm text-gray-300">
-                  <span className="font-bold text-info">Tier-based rewards</span> and raffles
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3 p-4">
-              <span className="text-xl">⚡</span>
-              <div className="flex-1">
-                <p className="text-sm text-gray-300">
-                  <span className="font-bold text-info">Staking boosts</span> up to 20x multiplier
-                </p>
-              </div>
-            </div>
+            )}
           </div>
           <div className="p-4 border-t border-gray-200">
             <button
